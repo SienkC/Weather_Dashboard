@@ -5,3 +5,13 @@
 // display todays weather in main box
 // display 5 days in smaller boxes
 // save city lat and long in local storage and create button for it
+
+var cityName = document.querySelector("#getCityName");
+var submitCityEl = document.querySelector("#search");
+
+submitCityEl.addEventListener("click", function (event){
+    if(cityName.value){
+        console.log("test:" + cityName.value);
+    }
+});
+
