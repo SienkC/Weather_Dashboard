@@ -26,13 +26,30 @@ function getLongLat(city){
     // use api call with city name
     // EX: http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={API key}
 
+    // add api key to make working url
+    var geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=64c7e1cf4f2a2a2d1abd02e09dd89b2b";
+
     // get lat and long
+    fetch(geoUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (cityDetails) {
+                // save lat and long in localstorage with city name
+                console.log(cityDetails);
+
+                getWeather(cityDetails[0].lat, cityDetails[0].lon);
+            })
+        }
+        else {
+            alert("Error: " + response.statusText);
+        }
+    })
 }
 
 function getWeather(lat, long){
     // use api call with lat and long
     // EX: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
+    console.log("Lat: " + lat + "\nLong: " + long);
     // get weather data
     // take avg temp for each day
     // date is unix
@@ -49,6 +66,8 @@ function getWeather(lat, long){
             // sumTempToday = sumTempToday + currentTemp <-running sum of all temps for today
             // ^similar sums for wind speed and humidity}
         // else if (tomorrow) <-do same as above
-        // else if (tstomorrow) ... etc for 5 days
+        // else if (tstomorrow) ... etc for 5 days}
+
+    // calculate avg for all 6 days
 }
 
