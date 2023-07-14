@@ -4,17 +4,27 @@
 var cityName = document.querySelector("#getCityName");
 var submitCityEl = document.querySelector("#search");
 var todayDetail = document.querySelector("#today");
-var day1Detail = document.querySelector("#day1");
-var day2Detail = document.querySelector("#day2");
-var day3Detail = document.querySelector("#day3");
-var day4Detail = document.querySelector("#day4");
-var day5Detail = document.querySelector("#day5");
 var daysDetail = document.querySelector("#days");
+var memory = document.querySelector("#memory");
+var allCities = JSON.parse(localStorage.getItem("cities"));
 
 
-// testing out date functionality
-var testDate = new Date(1689638400000);
-    console.log(new Date(1689638400000).getMonth() + "/" + new Date(1689638400000).getDate() + "/" + new Date(1689638400000).getFullYear());
+// show any previous cities
+if(allCities !== null){
+    for(let i = 0; i < allCities.length; i++) {
+        var city = document.createElement("button");
+        city.textContent = allCities[i][0];
+        city.setAttribute("class", "btn btn-primary");
+        city.setAttribute("type", "button");
+
+        city.addEventListener("click", function (event){
+            todayDetail.children[0].textContent = allCities[i][0];
+            getWeather(allCities[i][1], allCities[i][2]);
+        })
+
+        memory.appendChild(city);
+    }
+}
 
 submitCityEl.addEventListener("click", function (event){
     if(cityName.value.trim()){
@@ -43,6 +53,7 @@ function getLongLat(city){
                 console.log(cityDetails);
 
                 getWeather(cityDetails[0].lat, cityDetails[0].lon);
+                saveLongLat(city, cityDetails[0].lat, cityDetails[0].lon);
             })
         }
         else {
@@ -180,3 +191,20 @@ function getWeather(lat, long){
     }
 }
 
+function saveLongLat(city, lat, long) {
+    var cities = [];
+    var saveCity = [city, lat, long];
+
+    var pastCities = JSON.parse(localStorage.getItem("cities"));
+
+    // save previous cities, so they don't get overridden
+    if(JSON.parse(localStorage.getItem("cities")) !== null){
+        cities = cities.concat(pastCities);
+    }
+
+    // add on new city info
+    cities.push(saveCity);
+
+    // add to local storage
+    localStorage.setItem("cities", JSON.stringify(cities));
+}
