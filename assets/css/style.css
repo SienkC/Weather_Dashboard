@@ -1,0 +1,15 @@
+h1{
+    background-image: linear-gradient(to right, rgb(68, 77, 173) , rgb(66, 18, 121));
+}
+
+h3{
+    font-size: medium;
+}
+
+p{
+    font-size: small;
+}
+
+#memory{
+    margin-top: 10%;
+}
