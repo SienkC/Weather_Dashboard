@@ -43,7 +43,7 @@ function getLongLat(city){
 
     todayDetail.children[0].textContent = city;
     // add api key to make working url
-    var geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=64c7e1cf4f2a2a2d1abd02e09dd89b2b";
+    var geoUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=64c7e1cf4f2a2a2d1abd02e09dd89b2b";
 
     // get lat and long
     fetch(geoUrl).then(function (response) {
