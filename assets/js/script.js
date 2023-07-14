@@ -8,6 +8,14 @@
 
 var cityName = document.querySelector("#getCityName");
 var submitCityEl = document.querySelector("#search");
+var todayDetail = document.querySelector("#today");
+var day1Detail = document.querySelector("#day1");
+var day2Detail = document.querySelector("#day2");
+var day3Detail = document.querySelector("#day3");
+var day4Detail = document.querySelector("#day4");
+var day5Detail = document.querySelector("#day5");
+var daysDetail = document.querySelector("#days");
+
 
 // testing out date functionality
 var testDate = new Date(1689638400000);
@@ -31,6 +39,7 @@ function getLongLat(city){
     // Long: -81.3790304
     getWeather(28.5421109,-81.3790304);
 
+    todayDetail.children[0].textContent = city;
     // add api key to make working url
     // var geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=64c7e1cf4f2a2a2d1abd02e09dd89b2b";
 
@@ -84,7 +93,6 @@ function getWeather(lat, long){
                 console.log(weather);
                 console.log("Unix today: " + weather.list[0].dt);
 
-
                 // grab today's date and set the next 5 days
                 var today = new Date((weather.list[0].dt) * 1000);
                 var day1 = new Date(today);
@@ -97,7 +105,6 @@ function getWeather(lat, long){
                 day4.setDate(today.getDate() + 4);
                 var day5 = new Date(today);
                 day5.setDate(today.getDate() + 5);
-
 
 
                 console.log("Today: " + today);
@@ -161,10 +168,23 @@ function getWeather(lat, long){
 
                 console.log("Todays Avgs: " + (sums.today[0]/count.today) + (sums.today[1]/count.today) + (sums.today[2]/count.today));
 
+                displayWeather(sums, count, [today,day1,day2,day3,day4,day5]);
             })
         }
     })
     
+    function displayWeather(sums, count, daysList) {
+        todayDetail.children[1].children[0].textContent = "Temperature: " + (sums.today[0]/count.today) + "°F";
+        todayDetail.children[1].children[1].textContent = "Wind Speed: " + (sums.today[1]/count.today) + "mph";
+        todayDetail.children[1].children[2].textContent = "Humidity: " + (sums.today[2]/count.today) + "%";
+
+        for(let i = 0; i < daysDetail.children.length; i++) {
+            daysDetail.children[i].children[0].children[0].textContent = daysList[i+1];
+            daysDetail.children[i].children[0].children[1].children[0].textContent = "Temperature: " + (sums["day" + (i+1)][0]/count["day" + (i+1)]) + "°F";
+            daysDetail.children[i].children[0].children[1].children[1].textContent = "Wind Speed: " + (sums["day" + (i+1)][1]/count["day" + (i+1)]) + "mph";
+            daysDetail.children[i].children[0].children[1].children[2].textContent = "Humidity: " + (sums["day" + (i+1)][2]/count["day" + (i+1)]) + "%";
+        }
+    }
     // get weather data
     // take avg temp for each day
     // date is unix
