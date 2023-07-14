@@ -16,7 +16,7 @@ N/A
 
 To use the Weather Dashboard page, load webpage and type in a city. Click the "Search" button to show weather data for the input city. The page will display the average temperature, wind speed, and humidity for the current day and the next 5 days.
 
-Link to the webpage: [Work Day Scheduler]()
+Link to the webpage: [Weather Dashboard](https://sienkc.github.io/Weather_Dashboard/)
 
 Screenshot with generated random password:
 ![Screenshot of Webpage with city details shown](./assets/images/screenshot.png)
