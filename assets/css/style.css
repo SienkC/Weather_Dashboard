@@ -13,3 +13,12 @@ p{
 #memory{
     margin-top: 10%;
 }
+
+#days{
+    display: none;
+}
+
+#five-day{
+    display: none;
+
+}

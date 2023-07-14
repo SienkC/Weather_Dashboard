@@ -6,6 +6,7 @@ var submitCityEl = document.querySelector("#search");
 var todayDetail = document.querySelector("#today");
 var daysDetail = document.querySelector("#days");
 var memory = document.querySelector("#memory");
+var fiveDay = document.querySelector("#five-day")
 var allCities = JSON.parse(localStorage.getItem("cities"));
 
 
@@ -14,7 +15,7 @@ if(allCities !== null){
     for(let i = 0; i < allCities.length; i++) {
         var city = document.createElement("button");
         city.textContent = allCities[i][0];
-        city.setAttribute("class", "btn btn-primary");
+        city.setAttribute("class", "btn btn-secondary");
         city.setAttribute("type", "button");
 
         city.addEventListener("click", function (event){
@@ -180,6 +181,10 @@ function getWeather(lat, long){
         todayDetail.children[2].children[0].textContent = "Temperature: " + (Math.round((sums.today[0]/count.today)*100)/100) + "°F";
         todayDetail.children[2].children[1].textContent = "Wind Speed: " + (Math.round((sums.today[1]/count.today)*100)/100) + "mph";
         todayDetail.children[2].children[2].textContent = "Humidity: " + (Math.round((sums.today[2]/count.today)*100)/100) + "%";
+
+        // show boxes
+        fiveDay.style.display = "block";
+        daysDetail.style.display = "flex";
 
         // loop through the next 5 days and display values similar to method above
         for(let i = 0; i < daysDetail.children.length; i++) {
