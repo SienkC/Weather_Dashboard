@@ -28,9 +28,9 @@
             "all": 77
             },
             "wind": {
-            "speed": 2.8,
-            "deg": 212,
-            "gust": 5.42
+                "speed": 2.8,
+                "deg": 212,
+                "gust": 5.42
             },
             "visibility": 10000,
             "pop": 0,
